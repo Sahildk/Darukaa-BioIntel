@@ -5,7 +5,7 @@ Darukaa BioIntel is a scientific decision-support platform designed for ecologic
 
 - **Structured Environmental State** with explicit provenance and authority tiers
 - **Hybrid Scientific Retrieval** fusing BM25 lexical search and dense semantic similarity
-- **Multi-Metric Ecological Reasoning** concurrently modeling $\ge 3$ environmental variables
+- **Multi-Metric Ecological Reasoning** concurrently modeling ≥ 3 environmental variables
 - **Evidence-Constrained Recommendations** bounded strictly by peer-reviewed literature
 - **Claim-Level Validation** auditing quantitative effect sizes and causal alignment
 - **Contraindication Safeguards** blocking high-risk interventions in vulnerable parcels
@@ -45,11 +45,11 @@ flowchart LR
 
 ## Key Architectural Differentiators
 
-### 1. Multi-Metric Ecological Reasoning ($\ge 3$ Variables)
+### 1. Multi-Metric Ecological Reasoning (≥ 3 Variables)
 The system never operates on isolated variables. In the canonical challenge scenario, it concurrently evaluates:
 - **Region**: Semi-arid drylands
-- **Soil Condition**: $0.3\%$ Soil Organic Carbon (severely depleted)
-- **Climate Regime**: Low rainfall ($< 400\text{ mm/year}$)
+- **Soil Condition**: 0.3% Soil Organic Carbon (severely depleted)
+- **Climate Regime**: Low rainfall (< 400 mm/year)
 - **Current Crop**: Wheat
 - **Land Cover**: Continuous monoculture
 
@@ -62,7 +62,11 @@ The reasoning engine maintains strict ecological thermodynamics:
 
 ### 3. Authority Separation & Conflict Tracking
 The state manager distinguishes provenance origin from authority level:
-$$\text{AuthorityLevel.USER\_DIRECT} > \text{AuthorityLevel.EXTERNAL} > \text{AuthorityLevel.INFERRED}$$
+
+```text
+AuthorityLevel.USER_DIRECT > AuthorityLevel.EXTERNAL > AuthorityLevel.INFERRED
+```
+
 - An inferred model estimate can **never** overwrite an explicit user observation.
 - When two contradictory user observations are introduced (e.g., user initially states *"wheat monoculture"* and later *"primary crop is barley"*), the system refuses to silently overwrite. It generates an explicit `ConflictRecord` (`unresolved`) and asks for confirmation.
 
@@ -73,7 +77,7 @@ Before any recommendation reaches the user, it must pass 4 consecutive determini
 3. **Gate 3: Context Compatibility Gate**: Uses `ContextMatcher` to verify that regional, soil, and management requirements match active state.
 4. **Gate 4: Quantitative Verbatim Audit & Contraindication Firewall**:
    - Audits numerical figures and percentages; rejects ungrounded quantitative claims.
-   - The current evaluation configuration hard-blocks the cover-crop candidate below $300\text{ mm/year}$ annual rainfall because of the modeled moisture-competition contraindication.
+   - The current evaluation configuration hard-blocks the cover-crop candidate below 300 mm/year annual rainfall because of the modeled moisture-competition contraindication.
 
 ### 5. Deterministic Out-of-Domain (OOD) Abstention
 In hybrid retrieval over specialized scientific corpora, non-zero similarity scores on out-of-scope topics are inevitable. Darukaa BioIntel defines an explicit decision boundary (`EVIDENCE_ACCEPTANCE_THRESHOLD = 0.50`). Retrieval scores below $0.50$ are treated as background noise rather than accepted evidence ($0/5$ OOD queries accepted).
@@ -117,11 +121,11 @@ npm run dev
 ## Evaluator Walkthrough & Demos
 
 For a comprehensive evaluator walkthrough with pre-configured scenarios, refer to [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md):
-- **Scenario 1: Canonical Challenge (P0)**: Semi-arid wheat monoculture ($0.3\%$ SOC, low rainfall) $\rightarrow$ multi-metric reasoning ($\ge 3$ variables), 2 validated interventions, complete evidence chain.
-- **Scenario 2: Conversational Clarification**: Vague query ("Biodiversity is declining") $\rightarrow$ targeted diagnostic questions without guessing.
-- **Scenario 3: Severe Drought Contraindication**: Rainfall $< 300\text{ mm/year}$ $\rightarrow$ cover crops blocked due to moisture competition risk; residue retention preserved.
-- **Scenario 4: Contradiction Tracking**: Conflicting observations $\rightarrow$ explicit `ConflictRecord` created without data loss.
-- **Scenario 5: Adversarial Security Boundary**: Prompt injection attempting override $\rightarrow$ hard blocked by evidence firewall.
+- **Scenario 1: Canonical Challenge (P0)**: Semi-arid wheat monoculture (0.3% SOC, low rainfall) → multi-metric reasoning (≥ 3 variables), 2 validated interventions, complete evidence chain.
+- **Scenario 2: Conversational Clarification**: Vague query ("Biodiversity is declining") → targeted diagnostic questions without guessing.
+- **Scenario 3: Severe Drought Contraindication**: Rainfall < 300 mm/year → cover crops blocked due to moisture competition risk; residue retention preserved.
+- **Scenario 4: Contradiction Tracking**: Conflicting observations → explicit `ConflictRecord` created without data loss.
+- **Scenario 5: Adversarial Security Boundary**: Prompt injection attempting override → hard blocked by evidence firewall.
 - **Scenario 6: Developer & Evidence Trace**: Audit raw extracted observations, retrieval queries, and claim checklists in real-time.
 
 ---
@@ -144,18 +148,22 @@ Darukaa BioIntel includes a standalone, reproducible evaluation framework ([`bac
 
 > [!NOTE]
 > **Retrieval Score Formulation (19.33 / 20.00)**: The Knowledge/Retrieval category score is derived strictly from the 20-query extended benchmark:
-> $$\text{T-014 Score} = (\text{Recall@5} \times 0.40) + (\text{MRR} \times 0.40) + (\text{OOD\_Abstention} \times 0.20) = (1.0 \times 0.4) + (0.9167 \times 0.4) + (1.0 \times 0.2) = 0.9667$$
-> Multiplying by the 20% category weight yields exactly **$19.33 / 20.00$**.
+> ```text
+> T-014 Score = (Recall@5 × 0.40) + (MRR × 0.40) + (OOD_Abstention × 0.20)
+>             = (1.00 × 0.40) + (0.9167 × 0.40) + (1.00 × 0.20)
+>             = 0.9667 (96.67%)
+> ```
+> Multiplying by the 20% category weight yields exactly **19.33 / 20.00**.
 
 ### Extended 20-Query Retrieval Benchmark (T-014)
 | Metric | Result | Benchmark Target | Status |
 | :--- | :---: | :---: | :---: |
-| **Recall@1** | 86.67% | $\ge 60.0\%$ | ✅ Pass |
-| **Recall@3** | 93.33% | $\ge 75.0\%$ | ✅ Pass |
-| **Recall@5** | 100.00% | $\ge 80.0\%$ | ✅ Pass |
-| **Mean Reciprocal Rank (MRR)** | 0.9167 | $\ge 0.7000$ | ✅ Pass |
-| **Precision@5** | 29.33% | $\ge 25.0\%$ | ✅ Pass |
-| **OOD Accepted Matches** | 0 / 5 | $== 0$ | ✅ Pass (Zero OOD Accepted) |
+| **Recall@1** | 86.67% | ≥ 60.0% | ✅ Pass |
+| **Recall@3** | 93.33% | ≥ 75.0% | ✅ Pass |
+| **Recall@5** | 100.00% | ≥ 80.0% | ✅ Pass |
+| **Mean Reciprocal Rank (MRR)** | 0.9167 | ≥ 0.7000 | ✅ Pass |
+| **Precision@5** | 29.33% | ≥ 25.0% | ✅ Pass |
+| **OOD Accepted Matches** | 0 / 5 | == 0 | ✅ Pass (Zero OOD Accepted) |
 
 To reproduce the evaluation report locally:
 ```bash

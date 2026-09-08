@@ -69,7 +69,9 @@ flowchart TD
   - `EXTERNAL`: Assigned to retrieved database records.
   - `INFERRED`: Assigned to model estimations.
   - **Precedence Rule**:
-    $$\text{USER\_DIRECT} > \text{EXTERNAL} > \text{INFERRED}$$
+    ```text
+    AuthorityLevel.USER_DIRECT > AuthorityLevel.EXTERNAL > AuthorityLevel.INFERRED
+    ```
     Inferred values can never overwrite direct user observations.
 - **Immutable Observation History**: Every observation is assigned a deterministic ID (e.g., `OBS-conv-soil_organic_carbon-001`) and immutably appended to SQLite.
 - **Active Conflict Tracking**: Equal-authority contradictions produce an explicit `ConflictRecord` (`unresolved`), preserving the incumbent value and requiring user confirmation rather than silently overwriting.
@@ -94,7 +96,7 @@ Every candidate intervention must pass 4 consecutive deterministic gates before 
 3. **Gate 3: Context Compatibility Gate**: Verifies regional, climatic, and soil prerequisites against active state using `ContextMatcher`.
 4. **Gate 4: Quantitative Verbatim Audit & Contraindication Firewall**:
    - Audits all percentages and numbers; rejects claims not found verbatim in cited evidence.
-   - Evaluates contraindications against state (e.g., modeled rule blocking cover crops below $300\text{ mm/year}$ rainfall).
+   - Evaluates contraindications against state (e.g., modeled rule blocking cover crops below 300 mm/year rainfall).
 
 ### 5. Application & Evaluation Layer (`backend/app/services/`, `backend/app/evaluation/`)
 - **Application-Scoped Lifecycle**: `EnvironmentalChatService` uses shared, reusable components without global singleton pollution.

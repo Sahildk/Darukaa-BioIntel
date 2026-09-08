@@ -18,7 +18,7 @@ This script provides step-by-step instructions for testing and validating the co
 ## Scenario 1: Canonical Challenge Scenario (P0)
 
 ### Objective
-Demonstrate multi-metric reasoning across $\ge 3$ variables, active causal pathways, evidence retrieval, and claim-validated interventions.
+Demonstrate multi-metric reasoning across ≥ 3 variables, active causal pathways, evidence retrieval, and claim-validated interventions.
 
 ### Input Payload
 - **Natural Language Message**:
@@ -40,7 +40,7 @@ Demonstrate multi-metric reasoning across $\ge 3$ variables, active causal pathw
 2. **Ecological Reasoning**: Causal pathways link intensive monoculture to SOC depletion, and low SOC to reduced water retention capacity under water-limited dryland regimes.
 3. **Validated Recommendations**:
    - **Legume Cover Crops**: Builds soil organic matter, stimulates mycorrhizal activity, and biological nitrogen fixation (Evidence: Lal 2004, FAO 2020).
-   - **Surface Residue Retention ($\ge 30\%$)**: Reduces evaporation, moderates soil temperature by $2\text{--}5^\circ\text{C}$, and improves infiltration (Evidence: Lal 2004, IPCC 2022).
+   - **Surface Residue Retention (≥ 30%)**: Reduces evaporation, moderates soil temperature by 2–5°C, and improves infiltration (Evidence: Lal 2004, IPCC 2022).
 4. **Evidence Lineage**: Each recommendation card displays complete source citations, publisher, publication year, chunk ID, and external DOI links.
 
 ---
@@ -59,7 +59,7 @@ Verify that vague or incomplete input triggers targeted diagnostic questions wit
 2. Click **"Execute Assessment"**.
 
 ### Expected System Behavior
-1. **Completeness Gate**: System identifies $< 3$ variables and recognizes that ecological recommendations cannot be formulated responsibly.
+1. **Completeness Gate**: System identifies < 3 variables and recognizes that ecological recommendations cannot be formulated responsibly.
 2. **Clarification Response**: Returns a `ClarificationResponse` with a targeted inquiry:
    - *"Could you please specify your region, crop, or baseline soil conditions to determine appropriate ecological interventions?"*
 3. **Zero Hallucination**: No recommendations are manufactured; state preserves what little was reported.
@@ -72,7 +72,7 @@ Verify that vague or incomplete input triggers targeted diagnostic questions wit
 Demonstrate that the system's contraindication firewall blocks high-risk interventions during severe environmental deficits.
 
 ### Scientific Context
-The current evaluation configuration hard-blocks the cover-crop candidate below $300\text{ mm/year}$ annual rainfall because of the modeled moisture-competition contraindication (unmanaged cover crop biomass depletes soil moisture needed by the primary cash crop).
+The current evaluation configuration hard-blocks the cover-crop candidate below 300 mm/year annual rainfall because of the modeled moisture-competition contraindication (unmanaged cover crop biomass depletes soil moisture needed by the primary cash crop).
 
 ### Input Payload
 - **Message**:

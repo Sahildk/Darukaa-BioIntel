@@ -49,7 +49,7 @@ Consolidated Environmental State (>= 3 populated variables)
 A critical ecological distinction implemented in the reasoning engine:
 - **`climate.rainfall` is an Exogenous Climatic Boundary Condition**: Precipitation regimes (e.g., annual rainfall, seasonal distribution) are macroclimatic drivers imposed on the parcel. The system does not model agricultural or soil practices as creating rainfall.
 - **Interventions Modulate `soil.moisture` and Infiltration**: Interventions such as crop residue retention and organic matter additions increase **soil moisture retention capacity (`soil.moisture`)**, reduce direct evaporation, and improve **water infiltration rates** from available rainfall.
-- **Contraindication Thresholds**: When rainfall is severely deficit (e.g., modeled below $300\text{ mm/year}$ in semi-arid zones), competitive interventions like cover crops pose a high risk of soil moisture depletion for the primary cash crop.
+- **Contraindication Thresholds**: When rainfall is severely deficit (e.g., modeled below 300 mm/year in semi-arid zones), competitive interventions like cover crops pose a high risk of soil moisture depletion for the primary cash crop.
 
 ### 2. Multi-Variable Relationship Templates (`RELATIONSHIP_TEMPLATES`)
 The engine maintains declarative, evidence-grounded templates across key ecological domains:
