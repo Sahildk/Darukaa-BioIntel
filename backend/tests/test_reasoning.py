@@ -364,3 +364,55 @@ def test_deterministic_offline_behavior(reasoning_engine):
     assert len(res1.active_pathways) == len(res2.active_pathways)
     assert len(res1.candidate_interventions) == len(res2.candidate_interventions)
     assert [p.pathway_id for p in res1.active_pathways] == [p.pathway_id for p in res2.active_pathways]
+
+
+def test_behavioral_validation_canonical_challenge_scenario(reasoning_engine):
+    """Behavioral test: Canonical semi-arid wheat monoculture with 0.3% SOC and low rainfall."""
+    state = EnvironmentalState()
+    state.region = EnvironmentalVariable(value="semi-arid", source=ProvenanceSource.USER)
+    state.soil.organic_carbon = EnvironmentalVariable(value=0.3, unit="%", source=ProvenanceSource.USER)
+    state.land_use.land_cover = EnvironmentalVariable(value="monoculture", source=ProvenanceSource.USER)
+    state.land_use.crop = EnvironmentalVariable(value="wheat", source=ProvenanceSource.USER)
+    state.climate.rainfall = EnvironmentalVariable(value="low", source=ProvenanceSource.USER)
+
+    result = reasoning_engine.reason("conv-canonical", state)
+
+    # 1. Scientific sufficiency must pass
+    assert result.scientific_sufficiency.is_scientifically_sufficient is True
+    assert "soil_climate_management" in result.scientific_sufficiency.identified_domains
+
+    # 2. Sequential pathway A -> B -> C must form
+    assert len(result.active_pathways) == 1
+    pathway = result.active_pathways[0]
+    assert pathway.participating_variables == ["land_use.land_cover", "soil.organic_carbon", "climate.rainfall"]
+    assert len(pathway.ordered_relationships) == 2
+    assert "CHK-SRC-IPCC-2019-SRCCL-001" in pathway.evidence_ids
+    assert "CHK-SRC-FAO-2017-SOILCARBON-001" in pathway.evidence_ids
+
+    # 3. Interventions must include cover crops with moisture contraindications
+    actions = [i.action for i in result.candidate_interventions]
+    assert any("cover crops" in a.lower() for a in actions)
+    cover_crop_item = next(i for i in result.candidate_interventions if "cover crops" in i.action.lower())
+    assert any("moisture competition" in c.lower() for c in cover_crop_item.contraindications)
+
+
+def test_behavioral_validation_tropical_context_mismatch(reasoning_engine):
+    """Behavioral test: Humid tropical orchard rejects dryland templates via extensible ContextMatcher."""
+    state = EnvironmentalState()
+    state.region = EnvironmentalVariable(value="tropical", source=ProvenanceSource.USER)
+    state.soil.organic_carbon = EnvironmentalVariable(value=2.8, unit="%", source=ProvenanceSource.USER)
+    state.land_use.land_cover = EnvironmentalVariable(value="orchard", source=ProvenanceSource.USER)
+    state.climate.rainfall = EnvironmentalVariable(value="high", source=ProvenanceSource.USER)
+
+    result = reasoning_engine.reason("conv-tropical-mismatch", state)
+
+    # Dryland templates must be rejected with UNSUPPORTED_CONTEXT_MISMATCH
+    mismatches = [
+        ur for ur in result.unsupported_relationships
+        if ur.support_status == RelationshipSupportStatus.UNSUPPORTED_CONTEXT_MISMATCH
+    ]
+    assert len(mismatches) >= 2
+    mismatch_tpl_ids = {ur.template_id for ur in mismatches}
+    assert "TPL-MONOCULTURE-SOC-DEPLETION" in mismatch_tpl_ids
+    assert "TPL-SOC-WATER-RETENTION" in mismatch_tpl_ids
+
