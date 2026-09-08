@@ -1,7 +1,7 @@
 """Environmental state schemas with provenance tracking."""
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Optional, Union
+from typing import Any, List, Optional, Union
 from pydantic import BaseModel, Field
 
 
@@ -29,6 +29,7 @@ class EnvironmentalVariable(BaseModel):
     source: ProvenanceSource = ProvenanceSource.USER
     confidence: VariableConfidence = VariableConfidence.EXPLICIT
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    observation_id: Optional[str] = None
 
 
 class SoilState(BaseModel):
@@ -67,3 +68,5 @@ class EnvironmentalState(BaseModel):
     biodiversity: BiodiversityState = Field(default_factory=BiodiversityState)
     climate: ClimateState = Field(default_factory=ClimateState)
     human_impact: HumanImpactState = Field(default_factory=HumanImpactState)
+    active_conflicts: List[Any] = Field(default_factory=list)
+    observation_history: List[Any] = Field(default_factory=list)
