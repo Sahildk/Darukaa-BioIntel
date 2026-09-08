@@ -347,6 +347,27 @@ class EnvironmentalStateManager:
                 conflict=conflict,
             )
 
+    def add_observation(
+        self,
+        conversation_id: str,
+        variable_path: str,
+        value: EnvironmentalValueType,
+        unit: Optional[str] = None,
+        source: ProvenanceSource = ProvenanceSource.USER,
+        confidence: VariableConfidence = VariableConfidence.EXPLICIT,
+        observation_id: Optional[str] = None,
+    ) -> UpdateResult:
+        """Alias for record_observation to support explicit observation additions."""
+        return self.record_observation(
+            conversation_id=conversation_id,
+            variable_path=variable_path,
+            value=value,
+            unit=unit,
+            source=source,
+            confidence=confidence,
+            observation_id=observation_id,
+        )
+
     def resolve_conflict(
         self,
         conversation_id: str,
