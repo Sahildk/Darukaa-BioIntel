@@ -197,7 +197,7 @@ def run_behavioral_validation():
         relationship_id="REL-MOCK-3",
         template_id="TPL-MOCK-3",
         source_variable="soil.organic_carbon",
-        target_variable="climate.rainfall",
+        target_variable="soil.moisture",
         mechanism="SOC improves available water capacity",
         supporting_chunk_ids=["CHK-03"],
         supporting_source_ids=["SRC-03"],
@@ -211,7 +211,7 @@ def run_behavioral_validation():
     print(f"Sequential edges (A->B, B->C) pathway count: {len(sequential_pathways)}")
     print(f"Sequential Pathway Variables: {' -> '.join(sequential_pathways[0].participating_variables)}")
     assert len(sequential_pathways) == 1
-    assert sequential_pathways[0].participating_variables == ["land_use.land_cover", "soil.organic_carbon", "climate.rainfall"]
+    assert sequential_pathways[0].participating_variables == ["land_use.land_cover", "soil.organic_carbon", "soil.moisture"]
     print("\n>>> SCENARIO 4 BEHAVIORAL CHECK: PASSED (Sequential edge integrity strictly enforced)")
 
     print("\n" + "=" * 80)

@@ -21,8 +21,8 @@ RELATIONSHIP_TEMPLATES: List[RelationshipTemplate] = [
     RelationshipTemplate(
         template_id="TPL-SOC-WATER-RETENTION",
         source_variable="soil.organic_carbon",
-        target_variable="climate.rainfall",
-        mechanism_pattern="Soil organic carbon critically governs soil water retention capacity and rainfall use efficiency in moisture-limited regimes.",
+        target_variable="soil.moisture",
+        mechanism_pattern="Soil organic carbon critically governs available soil water holding capacity and moisture retention under low-rainfall dryland regimes.",
         required_topics=["soil_health", "climate"],
         required_terms=["water", "capacity", "rainfall"],
         directional_indicators=["water capacity", "efficiency", "availab", "retention", "moisture"],

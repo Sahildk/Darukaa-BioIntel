@@ -40,6 +40,29 @@ VARIABLE_LABELS: Dict[str, str] = {
     "human_impact.deforestation": "Deforestation Pressure",
 }
 
+INTERVENTION_EVIDENCE_KEYWORDS: Dict[str, Dict[str, Any]] = {
+    "legume_cover_crops": {
+        "tags": {"legume_cover_crops", "cover_crops", "legume_rotations"},
+        "terms": ["cover crop", "legume"],
+    },
+    "crop_residue_retention": {
+        "tags": {"crop_residue_retention", "crop_residues", "mulching"},
+        "terms": ["residue", "mulch"],
+    },
+    "hedgerows": {
+        "tags": {"hedgerows", "flower_strips", "field_borders"},
+        "terms": ["hedgerow", "flower", "border"],
+    },
+    "agroforestry": {
+        "tags": {"agroforestry", "boundary_windbreaks"},
+        "terms": ["agroforestry", "windbreak", "shelterbelt"],
+    },
+    "ecological_corridors": {
+        "tags": {"corridors", "ecological_corridors", "connectivity"},
+        "terms": ["corridor", "connectivity"],
+    },
+}
+
 
 class EcologicalReasoningEngine:
     """
@@ -183,7 +206,9 @@ class EcologicalReasoningEngine:
         active_pathways = self._assemble_sequential_pathways(supported_rels, state)
 
         # Step 6: Generate Candidate Interventions
-        candidate_interventions = self._generate_candidate_interventions(active_pathways, state)
+        candidate_interventions = self._generate_candidate_interventions(
+            active_pathways, state, retrieved_chunks
+        )
 
         # Step 7: Compile Limitations
         limitations: List[str] = []
@@ -363,10 +388,12 @@ class EcologicalReasoningEngine:
         self,
         pathways: List[ReasoningPathway],
         state: EnvironmentalState,
+        retrieved_chunks: Optional[List[ScoredChunk]] = None,
     ) -> List[CandidateIntervention]:
         """
         Generates structured candidate interventions from evidence-supported pathways.
         Includes contraindications and verified evidence IDs without fabricated numbers.
+        Associates evidence IDs from the retrieved chunk pool that substantiate the specific intervention.
         """
         interventions: List[CandidateIntervention] = []
         seen_actions: Set[str] = set()
@@ -387,8 +414,31 @@ class EcologicalReasoningEngine:
                     if not spec:
                         continue
 
-                    # Evidence IDs come strictly from the supporting chunks of this relationship/pathway
-                    ev_ids = rel.supporting_chunk_ids if rel.supporting_chunk_ids else pathway.evidence_ids
+                    # Match specific intervention evidence from retrieved pool
+                    matched_chunk_ids: List[str] = []
+                    if retrieved_chunks:
+                        matcher = INTERVENTION_EVIDENCE_KEYWORDS.get(action_name)
+                        for chunk in retrieved_chunks:
+                            chunk_text_lower = chunk.text.lower()
+                            chunk_interventions = set(chunk.interventions)
+
+                            is_match = False
+                            if matcher:
+                                if matcher["tags"].intersection(chunk_interventions):
+                                    is_match = True
+                                elif any(term in chunk_text_lower for term in matcher["terms"]):
+                                    is_match = True
+                            else:
+                                if action_name in chunk_interventions:
+                                    is_match = True
+
+                            if is_match and chunk.chunk_id not in matched_chunk_ids:
+                                matched_chunk_ids.append(chunk.chunk_id)
+
+                    # Use matched intervention chunks if found; otherwise fallback to pathway/rel chunks
+                    ev_ids = matched_chunk_ids if matched_chunk_ids else (
+                        rel.supporting_chunk_ids if rel.supporting_chunk_ids else pathway.evidence_ids
+                    )
 
                     interventions.append(
                         CandidateIntervention(

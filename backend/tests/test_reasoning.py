@@ -151,12 +151,12 @@ def test_no_fabricated_three_variable_chains(reasoning_engine):
     pathways = reasoning_engine._assemble_sequential_pathways([rel_ab, rel_ac], state)
     assert len(pathways) == 0, "Divergent edges A->B and A->C must not be chained into a sequential pathway A->B->C"
 
-    # Now add genuine sequential edge B -> C (soil.organic_carbon -> climate.rainfall)
+    # Now add genuine sequential edge B -> C (soil.organic_carbon -> soil.moisture)
     rel_bc = EvidenceSupportedRelationship(
         relationship_id="REL-BC",
         template_id="TPL-BC",
         source_variable="soil.organic_carbon",
-        target_variable="climate.rainfall",
+        target_variable="soil.moisture",
         mechanism="Depleted SOC impairs available water holding capacity",
         supporting_chunk_ids=["CHK-03"],
         supporting_source_ids=["SRC-03"],
@@ -168,7 +168,7 @@ def test_no_fabricated_three_variable_chains(reasoning_engine):
 
     pathways_seq = reasoning_engine._assemble_sequential_pathways([rel_ab, rel_bc], state)
     assert len(pathways_seq) == 1
-    assert pathways_seq[0].participating_variables == ["land_use.land_cover", "soil.organic_carbon", "climate.rainfall"]
+    assert pathways_seq[0].participating_variables == ["land_use.land_cover", "soil.organic_carbon", "soil.moisture"]
 
 
 def test_context_compatibility_layer():
@@ -384,7 +384,7 @@ def test_behavioral_validation_canonical_challenge_scenario(reasoning_engine):
     # 2. Sequential pathway A -> B -> C must form
     assert len(result.active_pathways) == 1
     pathway = result.active_pathways[0]
-    assert pathway.participating_variables == ["land_use.land_cover", "soil.organic_carbon", "climate.rainfall"]
+    assert pathway.participating_variables == ["land_use.land_cover", "soil.organic_carbon", "soil.moisture"]
     assert len(pathway.ordered_relationships) == 2
     assert "CHK-SRC-IPCC-2019-SRCCL-001" in pathway.evidence_ids
     assert "CHK-SRC-FAO-2017-SOILCARBON-001" in pathway.evidence_ids
