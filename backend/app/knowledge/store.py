@@ -66,6 +66,27 @@ class KnowledgeStore:
                     condition_text TEXT,
                     FOREIGN KEY (source_id) REFERENCES sources (source_id) ON DELETE CASCADE
                 );
+
+                CREATE TABLE IF NOT EXISTS chunks (
+                    chunk_id TEXT PRIMARY KEY,
+                    source_id TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    publisher TEXT NOT NULL,
+                    year INTEGER NOT NULL,
+                    topic TEXT NOT NULL,
+                    source_type TEXT NOT NULL,
+                    source_url TEXT NOT NULL,
+                    doi TEXT,
+                    geography TEXT NOT NULL,       -- JSON array
+                    variables TEXT NOT NULL,       -- JSON array
+                    interventions TEXT NOT NULL,   -- JSON array
+                    section_title TEXT NOT NULL,
+                    text TEXT NOT NULL,
+                    key_metrics TEXT NOT NULL,     -- JSON array
+                    token_count INTEGER NOT NULL,
+                    content_hash TEXT NOT NULL,
+                    FOREIGN KEY (source_id) REFERENCES sources (source_id) ON DELETE CASCADE
+                );
                 """
             )
 
@@ -190,3 +211,94 @@ class KnowledgeStore:
             if target_set.intersection(s_vars):
                 matched.append(s)
         return matched
+
+    def save_chunks(self, chunks: List[Any]) -> int:
+        """Persists a list of CorpusChunk objects into the SQLite chunks table."""
+        self.init_db()
+        with self._get_connection() as conn:
+            for c in chunks:
+                conn.execute(
+                    """
+                    INSERT OR REPLACE INTO chunks (
+                        chunk_id, source_id, title, publisher, year, topic,
+                        source_type, source_url, doi, geography, variables,
+                        interventions, section_title, text, key_metrics,
+                        token_count, content_hash
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        c.chunk_id,
+                        c.source_id,
+                        c.title,
+                        c.publisher,
+                        c.year,
+                        c.topic,
+                        c.source_type,
+                        c.source_url,
+                        c.doi,
+                        json.dumps(c.geography),
+                        json.dumps(c.variables),
+                        json.dumps(c.interventions),
+                        c.section_title,
+                        c.text,
+                        json.dumps(c.key_metrics),
+                        c.token_count,
+                        c.content_hash,
+                    ),
+                )
+            conn.commit()
+        return len(chunks)
+
+    def get_chunk(self, chunk_id: str) -> Optional[Dict[str, Any]]:
+        """Retrieves a single chunk by chunk_id."""
+        with self._get_connection() as conn:
+            row = conn.execute(
+                "SELECT * FROM chunks WHERE chunk_id = ?", (chunk_id,)
+            ).fetchone()
+            if not row:
+                return None
+            item = dict(row)
+            item["geography"] = json.loads(item["geography"])
+            item["variables"] = json.loads(item["variables"])
+            item["interventions"] = json.loads(item["interventions"])
+            item["key_metrics"] = json.loads(item["key_metrics"])
+            return item
+
+    def get_chunks_for_source(self, source_id: str) -> List[Dict[str, Any]]:
+        """Retrieves all chunks belonging to a given source_id."""
+        with self._get_connection() as conn:
+            rows = conn.execute(
+                "SELECT * FROM chunks WHERE source_id = ? ORDER BY chunk_id ASC", (source_id,)
+            ).fetchall()
+            chunks = []
+            for row in rows:
+                item = dict(row)
+                item["geography"] = json.loads(item["geography"])
+                item["variables"] = json.loads(item["variables"])
+                item["interventions"] = json.loads(item["interventions"])
+                item["key_metrics"] = json.loads(item["key_metrics"])
+                chunks.append(item)
+            return chunks
+
+    def list_all_chunks(self) -> List[Dict[str, Any]]:
+        """Lists all chunks currently indexed in SQLite."""
+        with self._get_connection() as conn:
+            rows = conn.execute(
+                "SELECT * FROM chunks ORDER BY chunk_id ASC"
+            ).fetchall()
+            chunks = []
+            for row in rows:
+                item = dict(row)
+                item["geography"] = json.loads(item["geography"])
+                item["variables"] = json.loads(item["variables"])
+                item["interventions"] = json.loads(item["interventions"])
+                item["key_metrics"] = json.loads(item["key_metrics"])
+                chunks.append(item)
+            return chunks
+
+    def get_chunk_count(self) -> int:
+        """Returns the total number of chunks in the database."""
+        with self._get_connection() as conn:
+            row = conn.execute("SELECT COUNT(*) AS cnt FROM chunks").fetchone()
+            return row["cnt"] if row else 0
+
