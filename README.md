@@ -1,6 +1,14 @@
 # Darukaa BioIntel
 ### AI Biodiversity Intelligence & Evidence-Constrained Decision Support
 
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React 18](https://img.shields.io/badge/React-18-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Tests](https://img.shields.io/badge/Tests-113%20Passed-brightgreen?style=flat-square&logo=pytest&logoColor=white)](backend/tests/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+
 > **An AI decision-support platform for land restoration and biodiversity that never hallucinates advice, never invents fake research citations, and uses hard safety rules in code to protect vulnerable farms.**
 
 ---
@@ -100,25 +108,43 @@ User Facts > External Database Records > AI Guesses
 
 ## Tech Stack
 
-### 🖥️ Backend
-- **Language**: Python 3.11
-- **Framework**: FastAPI (high-performance async REST API)
-- **Data Validation**: Pydantic v2 (strict schema contracts)
-- **Database**: SQLite (embedded, zero external setup for knowledge chunks and conversation state)
-- **Server**: Uvicorn ASGI
-- **Testing**: Pytest (**113 automated regression & claims audit tests**)
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=python,fastapi,sqlite,pytorch,react,typescript,tailwind,vite" alt="Darukaa BioIntel Tech Stack" />
+</p>
 
-### 🌐 Frontend
-- **Framework**: React 18
-- **Language**: TypeScript (mirrors backend Pydantic models 1:1)
-- **Build Tool**: Vite (sub-second hot reload and 665ms production builds)
-- **Styling**: Tailwind CSS (clean, responsive cards, dark/light theme support)
-- **Icons**: Lucide React (badges for citations, checks, and warnings)
+### 🖥️ Backend & Reasoning Engine
+| Technology | Modern Logo / Badge | Architectural Role |
+| :--- | :--- | :--- |
+| **Python 3.11** | ![Python](https://img.shields.io/badge/Python_3.11-3776AB?style=for-the-badge&logo=python&logoColor=white) | Core language, deterministic execution, and async pipeline |
+| **FastAPI** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white) | High-performance asynchronous REST API and OpenAPI contracts |
+| **Pydantic v2** | ![Pydantic](https://img.shields.io/badge/Pydantic_v2-E92063?style=for-the-badge&logo=pydantic&logoColor=white) | Rigid data validation, boundary schemas, and serialization fidelity |
+| **SQLite** | ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white) | Zero-setup embedded storage for knowledge chunks & conversation state |
+| **Uvicorn** | ![Uvicorn](https://img.shields.io/badge/Uvicorn-2C3E50?style=for-the-badge&logo=gunicorn&logoColor=white) | Lightning-fast ASGI production server |
 
-### 📊 Data & Evaluation
-- **Lexical Search**: Custom BM25 Inverted Index
-- **Ranking**: Reciprocal Rank Fusion (RRF, $k=60$)
-- **Benchmarking**: Custom automated test runner with 15 benchmark test cases and 20 extended retrieval queries
+### 🧠 Knowledge Retrieval & NLP
+| Technology | Modern Logo / Badge | Architectural Role |
+| :--- | :--- | :--- |
+| **PyTorch** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white) | Deep learning tensor compute and embedding execution |
+| **Hugging Face** | ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black) | Transformer model tokenization and weights management |
+| **Sentence-Transformers** | ![MiniLM](https://img.shields.io/badge/all--MiniLM--L6--v2-FFAA00?style=for-the-badge&logo=scikitlearn&logoColor=white) | 384-dimensional dense semantic vector representations |
+| **BM25 Inverted Index** | ![BM25](https://img.shields.io/badge/BM25_Lexical-2D3748?style=for-the-badge) | Exact keyword matching for scientific names, units, and metrics |
+| **Reciprocal Rank Fusion** | ![RRF](https://img.shields.io/badge/RRF_Hybrid_Fusion-4A5568?style=for-the-badge) | Merges sparse lexical and dense semantic rankings (`k = 60`) |
+
+### 🌐 Frontend & User Interface
+| Technology | Modern Logo / Badge | Architectural Role |
+| :--- | :--- | :--- |
+| **React 18** | ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | Reactive component UI and real-time state synchronization |
+| **TypeScript** | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) | 100% type safety mirroring backend Pydantic models 1:1 |
+| **Vite** | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) | Fast build tool (< 700ms production builds, sub-second HMR) |
+| **Tailwind CSS** | ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) | Modern utility styling, responsive cards, dark/light theme support |
+| **Lucide Icons** | ![Lucide](https://img.shields.io/badge/Lucide_React-F56565?style=for-the-badge&logo=feather&logoColor=white) | Sleek UI iconography for citations, statuses, and audit gates |
+
+### 🧪 Verification & Benchmarking
+| Technology | Modern Logo / Badge | Architectural Role |
+| :--- | :--- | :--- |
+| **Pytest** | ![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white) | Full regression test suite (**113 passed tests across 12 suites**) |
+| **Claims Auditor** | ![Claims Audit](https://img.shields.io/badge/Claims_Audit-2ECC71?style=for-the-badge) | 6-point automated verification preventing ungrounded scientific claims |
+| **Benchmark Runner** | ![Benchmark Suite](https://img.shields.io/badge/Benchmark_Suite-8E44AD?style=for-the-badge) | Standalone 15-case evaluation runner and 20-query retrieval benchmark |
 
 ---
 
