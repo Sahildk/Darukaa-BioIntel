@@ -1,124 +1,101 @@
-# 02 — Architecture
+# 02 — Final System Architecture
 
-## High-Level Pipeline
+## End-to-End System Architecture
 
-```text
-User
-  |
-  v
-Input / Query Parser
-  |
-  v
-Environmental State Manager
-  |
-  +---- missing critical variables ----> Clarification
-  |
-  v
-Query / Retrieval Planner
-  |
-  v
-Knowledge Retrieval
-  |------------------|
-  v                  v
-Structured Data    Scientific Documents
-  |                  |
-  +--------+---------+
-           v
-    Multi-Metric Reasoning
-           |
-           v
-   Recommendation Generation
-           |
-           v
-    Evidence / Claim Validator
-           |
-           v
-     Structured Response
-           |
-           v
-        Frontend
+Darukaa BioIntel is architected as an **Evidence-Constrained Scientific Decision-Support System** rather than an unconstrained generative chatbot. Every recommendation is bounded by retrieved scientific literature, evaluated across a structured multi-metric environmental state, and passed through deterministic claim-level validation firewalls before reaching the user.
+
+```mermaid
+flowchart TD
+    User([User / Evaluator]) -->|Natural Language + Structured JSON| API[FastAPI HTTP Layer]
+    API --> Service[EnvironmentalChatService]
+    
+    subgraph Conversation & State Management [Phases 5 & 6]
+        Service --> Flow[ConversationFlow]
+        Flow --> Parser[Query Parser]
+        Parser --> Ingest[State Ingestion & Authority Separation]
+        Ingest --> StateMgr[(EnvironmentalStateManager\nSQLite observation_history)]
+        StateMgr --> State[(Consolidated EnvironmentalState)]
+        State --> ConflictCheck{Active Conflicts or\n< 3 Variables?}
+        ConflictCheck -->|Yes| Clarify[Targeted ClarificationResponse]
+    end
+    
+    Clarify -->|Return Question & State| API
+    
+    subgraph Multi-Metric Reasoning [Phase 7]
+        ConflictCheck -->|No: Sufficient| Reasoner[EcologicalReasoningEngine]
+        Reasoner --> SuffCheck{Scientific Sufficiency\n& Connected Metrics?}
+        SuffCheck -->|Disconnected| ClarifySci[Scientific Sufficiency Clarification]
+        SuffCheck -->|Sufficient| Graph[Causal Graph Construction\n>= 3 Variables]
+        Graph --> RetrievalPlanner[Retrieval Planner]
+    end
+    
+    ClarifySci -->|Return Diagnostic Question| API
+    
+    subgraph Hybrid Retrieval [Phases 2-4]
+        RetrievalPlanner --> Retriever[HybridRetriever]
+        Retriever --> BM25[BM25 Inverted Index]
+        Retriever --> Dense[Semantic Dense Reranker]
+        BM25 & Dense --> RRF[Reciprocal Rank Fusion RRF]
+        RRF --> KnStore[(KnowledgeStore SQLite\n10 Curated Sources & Chunks)]
+        KnStore --> Chunks[Ranked ScoredChunks]
+    end
+    
+    Chunks --> Reasoner
+    Reasoner --> Pathways[Active Causal Pathways & Candidate Interventions]
+    
+    subgraph Evidence-Constrained Generation & Validation [Phase 8]
+        Pathways --> RecGen[RecommendationGenerator]
+        RecGen --> Val{4-Gate Claim Validator}
+        Val --> Gate1[Gate 1: Evidence Presence]
+        Gate1 --> Gate2[Gate 2: Mechanism-Specific Support]
+        Gate2 --> Gate3[Gate 3: Context Compatibility Layer]
+        Gate3 --> Gate4[Gate 4: Quantitative Audit & Contraindication Firewall]
+        Gate4 --> VerifiedRecs[Verified Recommendations with Full Lineage]
+    end
+    
+    subgraph Output Presentation [Phases 9 & 10]
+        VerifiedRecs --> Response[RecommendationResponse\n+ DeveloperTrace]
+        Response --> UI[React / TypeScript Frontend\nDecision-Support Interface]
+    end
 ```
 
-## Architectural Principles
+---
 
-### 1. Retrieval Before Recommendation
-The recommendation stage should receive retrieved evidence rather than relying on the model's latent knowledge alone.
+## Architectural Subsystems
 
-### 2. State Before Reasoning
-Known environmental variables should be represented explicitly so the system can reason over them consistently.
+### 1. State & Provenance Subsystem (`backend/app/state/`)
+- **Authority Separation (`AuthorityLevel`)**:
+  - `USER_DIRECT`: Assigned to user statements and structured inputs.
+  - `EXTERNAL`: Assigned to retrieved database records.
+  - `INFERRED`: Assigned to model estimations.
+  - **Precedence Rule**:
+    $$\text{USER\_DIRECT} > \text{EXTERNAL} > \text{INFERRED}$$
+    Inferred values can never overwrite direct user observations.
+- **Immutable Observation History**: Every observation is assigned a deterministic ID (e.g., `OBS-conv-soil_organic_carbon-001`) and immutably appended to SQLite.
+- **Active Conflict Tracking**: Equal-authority contradictions produce an explicit `ConflictRecord` (`unresolved`), preserving the incumbent value and requiring user confirmation rather than silently overwriting.
 
-### 3. Separate Evidence From Inference
-Retrieved evidence and model-generated reasoning should be distinguishable.
+### 2. Knowledge & Hybrid Retrieval Subsystem (`backend/app/knowledge/`, `backend/app/retrieval/`)
+- **Curated Scientific Corpus**: 10 peer-reviewed landmark studies across Soil Health, Land Use, Climate, and Biodiversity.
+- **Hybrid Fusion**: Combines BM25 lexical search and dense semantic similarity using Reciprocal Rank Fusion (RRF, $k=60$).
+- **Deterministic Out-of-Domain (OOD) Policy**:
+  - Strict evidence acceptance threshold: `EVIDENCE_ACCEPTANCE_THRESHOLD = 0.50`.
+  - Scores below $0.50$ are classified as background noise, preventing out-of-scope topics from generating accepted evidence.
 
-### 4. Deterministic Where Possible
-Use ordinary code for:
-- schema validation
-- state merging
-- missing-field detection
-- metadata filtering
-- response validation
+### 3. Multi-Metric Ecological Reasoning Engine (`backend/app/reasoning/`)
+- **Minimum Dimensionality**: Concurrently evaluates $\ge 3$ environmental variables.
+- **Scientific Sufficiency Gate**: Blocks reasoning if submitted variables lack essential ecological context (e.g., climate + crop without soil condition or land management).
+- **Causal Graph & Directional Verification**: Validates relationship templates against retrieved chunk keywords and directional indicators (`deplet`, `enhanc`, `loss`).
+- **Exogenous Climate Boundary Condition**: Explicitly models `climate.rainfall` as an exogenous forcing; soil interventions modulate `soil.moisture` and water infiltration rather than atmospheric rainfall.
 
-Use the LLM where it adds value:
-- natural-language interpretation
-- query planning
-- synthesis
-- explanation
+### 4. Evidence-Constrained Generation (ECG) & Claim Validator (`backend/app/recommendation/`)
+Every candidate intervention must pass 4 consecutive deterministic gates before inclusion in final recommendations:
+1. **Gate 1: Evidence Presence Gate**: Intercepts unbacked proposals. Every candidate must cite valid chunk IDs in the knowledge base.
+2. **Gate 2: Mechanism-Specific Support Gate**: Cross-references action keywords and affected metrics against the verbatim text of cited chunks.
+3. **Gate 3: Context Compatibility Gate**: Verifies regional, climatic, and soil prerequisites against active state using `ContextMatcher`.
+4. **Gate 4: Quantitative Verbatim Audit & Contraindication Firewall**:
+   - Audits all percentages and numbers; rejects claims not found verbatim in cited evidence.
+   - Evaluates contraindications against state (e.g., modeled rule blocking cover crops below $300\text{ mm/year}$ rainfall).
 
-## Suggested Technology Shape
-
-Frontend:
-- Next.js
-- TypeScript
-
-Backend:
-- Python
-- FastAPI
-
-Knowledge:
-- PostgreSQL + pgvector or an equivalent vector store
-- structured environmental records
-- document metadata
-
-The final choice must be based on implementation speed and reliability. Do not introduce infrastructure that does not improve the demo.
-
-## Core Components
-
-### Query Understanding
-Extract:
-- user intent
-- environmental variables
-- values/qualifiers
-- geography
-- missing information
-
-### Environmental State
-Maintain the latest trusted values from the conversation.
-
-### Retrieval Planner
-Determine which knowledge topics and variables matter to the current question.
-
-### Knowledge Retrieval
-Perform semantic retrieval plus metadata filtering where useful.
-
-### Reasoning Engine
-Identify relationships among multiple variables and connect them to evidence.
-
-### Recommendation Engine
-Generate actionable interventions constrained by retrieved evidence.
-
-### Evidence Validator
-Check that claims/citations in the final response map to retrieved source records.
-
-### Conversation Manager
-Preserve state and determine whether to clarify or answer.
-
-## Failure Modes
-
-The system should degrade safely when:
-- no evidence is retrieved
-- user information is incomplete
-- evidence is weak or conflicting
-- an LLM response does not match the required schema
-- an external model/API fails
-
-In these cases, return a transparent limitation rather than a fabricated answer.
+### 5. Application & Evaluation Layer (`backend/app/services/`, `backend/app/evaluation/`)
+- **Application-Scoped Lifecycle**: `EnvironmentalChatService` uses shared, reusable components without global singleton pollution.
+- **Isolated Evaluation State**: `EvaluationRunner` executes test suites inside disposable SQLite databases (`data/eval_state_{id}.db`) that auto-delete after runs, guaranteeing zero contamination of production data.

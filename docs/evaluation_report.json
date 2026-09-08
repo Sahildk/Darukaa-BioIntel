@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-08T04:36:51.755996+00:00",
-  "git_commit": "f138c31",
+  "timestamp": "2026-09-08T04:51:35.608883+00:00",
+  "git_commit": "3641322",
   "corpus_version": "1.0.0",
   "corpus_source_count": 10,
   "total_tests": 15,
@@ -68,7 +68,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Considered 5 variables, produced 2 validated recommendations with complete evidence linkage.",
-      "execution_time_ms": 68.35959999989427,
+      "execution_time_ms": 64.27179999991495,
       "diagnostics": {
         "variables_considered": [
           "climate.rainfall",
@@ -91,11 +91,11 @@
       "passed": true,
       "score": 1.0,
       "details": "Tropical agroforestry intervention correctly rejected for semi-arid state due to context mismatch.",
-      "execution_time_ms": 27.3985999992874,
+      "execution_time_ms": 26.150400000915397,
       "diagnostics": {
         "is_valid": false,
         "rejection_stage": "context",
-        "rejection_reason": "Context mismatch: Context 'region' value 'semi-arid' does not match required categories: ['subtropical', 'humid_tropics', 'tropical']., Prerequisite context variable 'climate.rainfall' is absent from environmental state."
+        "rejection_reason": "Context mismatch: Context 'region' value 'semi-arid' does not match required categories: ['tropical', 'humid_tropics', 'subtropical']., Prerequisite context variable 'climate.rainfall' is absent from environmental state."
       }
     },
     {
@@ -105,7 +105,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Phase 7 correctly rejected scientific sufficiency for disconnected climate + crop metrics without soil condition.",
-      "execution_time_ms": 15.200499999991735,
+      "execution_time_ms": 15.88620000075025,
       "diagnostics": {
         "response_type": "ClarificationResponse",
         "missing_variables": [
@@ -123,7 +123,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Deterministic quantitative firewall detected unbacked numeric claim '45%' and rejected claim validity.",
-      "execution_time_ms": 64.62780000038038,
+      "execution_time_ms": 58.08270000125049,
       "diagnostics": {
         "is_valid": false,
         "claim_records": [
@@ -142,7 +142,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Verified 11 evidence items across 2 recommendations with complete metadata chains.",
-      "execution_time_ms": 68.27270000030694,
+      "execution_time_ms": 60.546099999555736,
       "diagnostics": {
         "verified_evidence_count": 11
       }
@@ -154,7 +154,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Anti-hallucination firewall intercepted candidate with fabricated chunk ID and rejected it.",
-      "execution_time_ms": 67.51270000131626,
+      "execution_time_ms": 57.13640000067244,
       "diagnostics": {
         "is_valid": false,
         "rejection_stage": "evidence",
@@ -168,7 +168,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Targeted ClarificationResponse triggered with missing variable inquiries.",
-      "execution_time_ms": 6.4044999999168795,
+      "execution_time_ms": 6.733299998813891,
       "diagnostics": {
         "response_type": "ClarificationResponse",
         "missing_variables": [
@@ -187,7 +187,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Multi-turn state successfully accumulated observations across turns without re-asking established facts.",
-      "execution_time_ms": 62.81750000016473,
+      "execution_time_ms": 38.04810000110592,
       "diagnostics": {
         "t1_type": "ClarificationResponse",
         "t2_type": "RecommendationResponse",
@@ -205,7 +205,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Structured JSON inputs properly parsed, assigned provenance 'structured_input', and drove pipeline execution.",
-      "execution_time_ms": 42.96500000054948,
+      "execution_time_ms": 44.15979999976116,
       "diagnostics": {
         "soc_source": "ProvenanceSource.STRUCTURED_INPUT",
         "ph_source": "ProvenanceSource.STRUCTURED_INPUT"
@@ -218,7 +218,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Equal-authority contradiction generated explicit ConflictRecord without silent data loss.",
-      "execution_time_ms": 12.39269999859971,
+      "execution_time_ms": 14.489400000456953,
       "diagnostics": {
         "active_conflicts_count": 1,
         "conflict_path": "land_use.crop"
@@ -231,7 +231,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Independent sessions maintained strict state isolation with zero cross-contamination.",
-      "execution_time_ms": 39.07020000042394,
+      "execution_time_ms": 40.643899999849964,
       "diagnostics": {}
     },
     {
@@ -241,7 +241,7 @@
       "passed": true,
       "score": 0.9667,
       "details": "20 queries evaluated: Recall@5=100.00%, MRR=0.9167, Precision@5=29.33%, OOD accepted matches=0/5 (threshold=0.5).",
-      "execution_time_ms": 36.26820000135922,
+      "execution_time_ms": 35.24430000106804,
       "diagnostics": {
         "recall_at_1": 0.8667,
         "recall_at_3": 0.9333,
@@ -258,7 +258,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Out-of-scope query safely intercepted without generating fabricated scientific recommendations.",
-      "execution_time_ms": 4.7011999995447695,
+      "execution_time_ms": 4.8903999995673075,
       "diagnostics": {
         "response_type": "ClarificationResponse"
       }
@@ -270,7 +270,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Cover crop candidate hard-blocked in < 300 mm drought parcel while safe residue retention was recommended.",
-      "execution_time_ms": 45.061900000291644,
+      "execution_time_ms": 44.490499998573796,
       "diagnostics": {
         "cover_crop_blocked": true,
         "residue_recommended": true,
@@ -286,7 +286,7 @@
       "passed": true,
       "score": 1.0,
       "details": "Prompt injection failed to manufacture scientific authority or inject unverified citations.",
-      "execution_time_ms": 39.656700000705314,
+      "execution_time_ms": 39.68879999956698,
       "diagnostics": {
         "clearcut_blocked": true,
         "fake_citation_absent": true,

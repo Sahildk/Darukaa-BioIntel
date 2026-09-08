@@ -1,8 +1,8 @@
 # Darukaa BioIntel — Phase 11 Comprehensive Evaluation Report
 
 ## Executive Summary
-- **Timestamp**: `2026-09-08T04:36:51.755996+00:00`
-- **Git Commit**: `f138c31`
+- **Timestamp**: `2026-09-08T04:51:35.608883+00:00`
+- **Git Commit**: `3641322`
 - **Curated Corpus**: 10 peer-reviewed/landmark sources (v1.0.0)
 - **Execution Mode**: 100% Deterministic & Offline
 - **Benchmark Pass Rate**: 15/15 (100.0%)
