@@ -129,71 +129,17 @@ def get_demo_scenarios() -> List[DemoScenario]:
     "/evaluate/run",
     response_model=EvaluationReport,
     tags=["Evaluation"],
-    summary="Development stub for executing benchmark test suite",
+    summary="Execute comprehensive evaluation benchmark test suite",
 )
-def run_evaluation_stub() -> EvaluationReport:
-    """Stub returning the structured evaluation report format for T-001 through T-009."""
-    now_iso = datetime.now(timezone.utc).isoformat()
-    test_cases = [
-        EvaluationTestCaseResult(
-            test_id="T-001",
-            title="Challenge Semi-Arid Wheat Monoculture (>= 3 variables)",
-            passed=True,
-            details="Contract validates >=3 environmental variables and evidence linkage.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-002",
-            title="Missing Data Clarification",
-            passed=True,
-            details="Contract returns ClarificationResponse when input lacks variables.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-003",
-            title="Multi-Turn Context Persistence",
-            passed=True,
-            details="Contract schema supports multi-turn EnvironmentalState accumulation.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-004",
-            title="Unsupported Quantitative Claim Handling",
-            passed=True,
-            details="Contract schema includes limitation field and requires evidence backing.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-005",
-            title="Evidence Trace Auditability",
-            passed=True,
-            details="Evidence records retain source_id, title, publisher, and source_url.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-006",
-            title="Conflicting/Weak Evidence Transparency",
-            passed=True,
-            details="EvidenceStrength field enables categorizing support level.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-007",
-            title="Structured JSON Input Handling",
-            passed=True,
-            details="StructuredInput model properly maps to EnvironmentalState.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-008",
-            title="Out-of-Scope Query Handling",
-            passed=True,
-            details="Contract supports limitations list to signal boundary conditions.",
-        ),
-        EvaluationTestCaseResult(
-            test_id="T-009",
-            title="Anti-Hallucination: No Evidence -> No Claim",
-            passed=True,
-            details="Traceability schema verifies evidence presence before recommendation generation.",
-        ),
-    ]
+def run_evaluation_suite(
+    service: EnvironmentalChatService = Depends(get_chat_service),
+) -> EvaluationReport:
+    """
+    Executes the comprehensive Phase 11 evaluation suite across all 15 benchmark cases
+    (Reasoning, Grounding, Knowledge/Retrieval, Conversation, Safety) and returns the report.
+    """
+    from app.evaluation.runner import EvaluationRunner
+    runner = EvaluationRunner(base_service=service)
+    sys_report = runner.run_all()
+    return runner.to_api_report(sys_report)
 
-    return EvaluationReport(
-        timestamp=now_iso,
-        total_tests=len(test_cases),
-        passed_tests=len(test_cases),
-        results=test_cases,
-    )

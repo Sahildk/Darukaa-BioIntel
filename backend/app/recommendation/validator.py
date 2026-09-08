@@ -130,7 +130,10 @@ class EvidenceTraceabilityValidator:
         # ---------------------------------------------------------------------
         action_text = candidate.action.lower()
         rationale_text = candidate.rationale.lower()
-        combined_chunk_text = " ".join(c["text"].lower() for c in resolved_chunks)
+        combined_chunk_text = " ".join(
+            f"{c.get('title', '')} {c.get('section_title', '')} {c.get('text', '')}".lower()
+            for c in resolved_chunks
+        )
 
         # Check if the intervention action itself is substantiated in the supporting chunks
         action_keywords = self._extract_action_keywords(action_text)
@@ -372,10 +375,25 @@ class EvidenceTraceabilityValidator:
             c_low = c.lower()
             if "semi-arid" in c_low or "dryland" in c_low:
                 rules["region"] = ["semi-arid", "drylands", "arid"]
+            elif "tropical" in c_low or "humid" in c_low:
+                rules["region"] = ["tropical", "humid_tropics", "subtropical"]
+            elif "temperate" in c_low:
+                rules["region"] = ["temperate", "sub-humid"]
+
             if "baseline soc" in c_low or "soc <" in c_low or "soc <=" in c_low:
                 match = re.search(r"(\d+(?:\.\d+)?)\s*%", c_low)
                 if match:
                     rules["soil.organic_carbon"] = {"lte": float(match.group(1))}
+
+            if "rainfall >" in c_low or "rainfall >=" in c_low:
+                match = re.search(r"(\d+(?:\.\d+)?)\s*mm", c_low)
+                if match:
+                    rules["climate.rainfall"] = {"gte": float(match.group(1))}
+            elif "rainfall <" in c_low or "rainfall <=" in c_low:
+                match = re.search(r"(\d+(?:\.\d+)?)\s*mm", c_low)
+                if match:
+                    rules["climate.rainfall"] = {"lte": float(match.group(1))}
+
             if "cropland" in c_low or "monoculture" in c_low:
                 rules["land_use.land_cover"] = ["cropland", "monoculture"]
         return rules

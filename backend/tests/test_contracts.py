@@ -259,13 +259,13 @@ def test_demo_scenarios_endpoint(client):
         assert s.sample_request.message
 
 
-def test_evaluate_run_stub_endpoint(client):
-    """Verify POST /api/evaluate/run returns formatted EvaluationReport for T-001 to T-009."""
+def test_evaluate_run_live_endpoint(client):
+    """Verify POST /api/evaluate/run returns live EvaluationReport across all 15 benchmark cases."""
     response = client.post("/api/evaluate/run")
     assert response.status_code == 200
     report = EvaluationReport.model_validate(response.json())
-    assert report.total_tests == 9
-    assert report.passed_tests == 9
+    assert report.total_tests == 15
+    assert report.passed_tests >= 14
     test_ids = [r.test_id for r in report.results]
-    for i in range(1, 10):
-        assert f"T-00{i}" in test_ids
+    for i in range(1, 16):
+        assert f"T-{i:03d}" in test_ids

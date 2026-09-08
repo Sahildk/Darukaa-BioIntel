@@ -1,6 +1,6 @@
 """Demo scenario and evaluation test schemas."""
-from typing import List
-from pydantic import BaseModel
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, Field
 from .chat import ChatRequest
 
 
@@ -18,6 +18,10 @@ class EvaluationTestCaseResult(BaseModel):
     title: str
     passed: bool
     details: str
+    category: Optional[str] = None
+    score: Optional[float] = None
+    execution_time_ms: Optional[float] = None
+    diagnostics: Optional[Dict[str, Any]] = None
 
 
 class EvaluationReport(BaseModel):
@@ -26,3 +30,6 @@ class EvaluationReport(BaseModel):
     total_tests: int
     passed_tests: int
     results: List[EvaluationTestCaseResult]
+    overall_score: Optional[float] = Field(None, description="Internal hackathon-aligned evaluation score out of 100")
+    categories: Optional[Dict[str, Any]] = None
+    retrieval_benchmark: Optional[Dict[str, Any]] = None
