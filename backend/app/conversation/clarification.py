@@ -101,8 +101,7 @@ class CompletenessChecker:
         missing_candidates = [v for v in CORE_HIGH_VALUE_VARIABLES if v not in populated_set]
 
         # Select a minimal targeted set of missing variables (e.g. enough to satisfy minimum)
-        needed_count = max(self.min_required_variables - len(populated), 1)
-        selected_count = min(len(missing_candidates), max(needed_count, 2), self.max_clarification_vars)
+        selected_count = min(len(missing_candidates), self.max_clarification_vars)
         selected_missing = missing_candidates[:selected_count]
 
         # Generate targeted clarification question

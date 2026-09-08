@@ -226,10 +226,20 @@ def test_chat_endpoint_rejection_of_invalid_requests(client):
 
 def test_conversation_state_endpoint(client):
     """Verify GET /api/conversations/{id} returns EnvironmentalState."""
+    # First populate state via /api/chat with structured input
+    client.post(
+        "/api/chat",
+        json={
+            "conversation_id": "conv-123",
+            "message": "We have 0.3% SOC in our cropland.",
+            "structured_input": {"soil_organic_carbon": 0.3},
+        },
+    )
     response = client.get("/api/conversations/conv-123")
     assert response.status_code == 200
     state = EnvironmentalState.model_validate(response.json())
     assert state.soil.organic_carbon is not None
+    assert state.soil.organic_carbon.value == 0.3
 
 
 def test_demo_scenarios_endpoint(client):

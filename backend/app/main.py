@@ -1,9 +1,19 @@
 """Main FastAPI application entrypoint."""
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import router as api_router
 from app.config import settings
+from app.services.conversation_service import EnvironmentalChatService
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Initializes application-scoped reusable components on startup."""
+    app.state.chat_service = EnvironmentalChatService()
+    yield
+
 
 app = FastAPI(
     title=settings.app_name,
@@ -11,6 +21,7 @@ app = FastAPI(
     description="Evidence-constrained environmental intelligence and decision-support system for biodiversity, land health, and restoration.",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # CORS middleware

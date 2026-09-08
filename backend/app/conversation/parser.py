@@ -96,6 +96,20 @@ class DeterministicQueryParser(BaseQueryParser):
                     evidence_text=rain_qual_match.group(0).strip(),
                 ))
 
+        # 3b. Temperature
+        temp_match = re.search(r"(\d+(?:\.\d+)?)\s*(?:°c|degrees\s+(?:celsius|c)|deg\s+c|celsius)\b", lower)
+        if not temp_match:
+            temp_match = re.search(r"temperature\s+(?:is\s+)?(\d+(?:\.\d+)?)\b", lower)
+        if temp_match:
+            val = float(temp_match.group(1))
+            extracted.append(ExtractedObservation(
+                variable_path="climate.temperature",
+                value=val,
+                unit="C",
+                confidence=VariableConfidence.EXPLICIT,
+                evidence_text=temp_match.group(0).strip(),
+            ))
+
         # 4. Crop Type
         crops = ["wheat", "rice", "corn", "maize", "barley", "sorghum", "soybean", "millet", "chickpea", "citrus", "cotton"]
         for c in crops:

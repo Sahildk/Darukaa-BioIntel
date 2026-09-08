@@ -20,13 +20,23 @@ class TimeHorizon(str, Enum):
 
 
 class RecommendationItem(BaseModel):
-    """An actionable, evidence-grounded recommendation."""
+    """An actionable, evidence-grounded recommendation with full scientific traceability."""
+    recommendation_id: Optional[str] = None
     action: str
+    rationale: Optional[str] = None
     why: str
     impacted_metrics: List[str]
     time_horizon: TimeHorizon
     evidence_strength: EvidenceStrength
-    evidence: List[EvidenceItem]
+    evidence: List[EvidenceItem] = Field(default_factory=list)
+    evidence_ids: List[str] = Field(default_factory=list)
+    source_ids: List[str] = Field(default_factory=list)
+    supporting_relationship_ids: List[str] = Field(default_factory=list)
+    supporting_pathway_ids: List[str] = Field(default_factory=list)
+    contraindications: List[str] = Field(default_factory=list)
+    assumptions: List[str] = Field(default_factory=list)
+    limitations: List[str] = Field(default_factory=list)
+    claim_validations: List[Any] = Field(default_factory=list)
 
 
 class DeveloperTrace(BaseModel):

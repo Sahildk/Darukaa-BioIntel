@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from app.schemas.evidence import EvidenceItem
-from app.schemas.recommendation import DeveloperTrace, EvidenceStrength, TimeHorizon
+from app.schemas.recommendation import DeveloperTrace, EvidenceStrength, RecommendationItem, TimeHorizon
 
 
 class ClaimValidationStatus(str, Enum):
@@ -25,29 +25,6 @@ class ClaimValidationRecord(BaseModel):
     status: ClaimValidationStatus
     supporting_chunk_ids: List[str] = Field(default_factory=list)
     details: str
-
-
-class RecommendationItem(BaseModel):
-    """
-    A fully validated, evidence-grounded recommendation item with complete traceability.
-    Compatible with Phase 1 contracts while providing Phase 8 claim-level audits.
-    """
-    recommendation_id: str
-    action: str
-    rationale: str
-    why: str = Field(..., description="Backward-compatible alias for rationale")
-    impacted_metrics: List[str]
-    time_horizon: TimeHorizon
-    evidence_ids: List[str]
-    source_ids: List[str]
-    evidence_strength: EvidenceStrength
-    evidence: List[EvidenceItem] = Field(default_factory=list)
-    supporting_relationship_ids: List[str] = Field(default_factory=list)
-    supporting_pathway_ids: List[str] = Field(default_factory=list)
-    contraindications: List[str] = Field(default_factory=list)
-    assumptions: List[str] = Field(default_factory=list)
-    limitations: List[str] = Field(default_factory=list)
-    claim_validations: List[ClaimValidationRecord] = Field(default_factory=list)
 
 
 class RejectedCandidate(BaseModel):
