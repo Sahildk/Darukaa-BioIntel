@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-TAMBURINI-2020-SCIADV",
+  "metadata": {
+    "title": "Agricultural diversification promotes multiple ecosystem services without compromising yield",
+    "publisher": "Science Advances",
+    "year": 2020,
+    "topic": "land_use",
+    "source_type": "paper",
+    "source_url": "https://www.science.org/doi/10.1126/sciadv.aba1715",
+    "doi": "10.1126/sciadv.aba1715",
+    "geography": ["global", "temperate", "semi-arid", "tropical"],
+    "variables": ["crop_diversity", "species_richness", "soil_organic_carbon", "pollinator_abundance"],
+    "interventions": ["intercropping", "crop_rotation", "cover_crops", "agroforestry"]
+  },
+  "summary": "Global meta-analysis of 5,188 agricultural experiments showing diversification enhances biodiversity and soil organic carbon without reducing yields.",
+  "sections": [
+    {
+      "section_title": "Multi-Service Synergies",
+      "text": "Synthesis of 5,188 studies demonstrates that agricultural diversification—such as intercropping, cover cropping, and agroforestry—enhances biodiversity by 24% and soil organic carbon by 6-15%, while simultaneously strengthening pest regulation and pollination services without reducing crop yields.",
+      "key_metrics": ["species_richness", "soil_organic_carbon", "crop_diversity"]
+    },
+    {
+      "section_title": "Monoculture Trade-Offs",
+      "text": "Homogeneous monocultures systematically diminish natural pest suppression and beneficial insect diversity, requiring escalating chemical interventions that further disrupt below-ground and above-ground trophic webs.",
+      "key_metrics": ["species_richness", "pollinator_abundance"]
+    }
+  ]
+}

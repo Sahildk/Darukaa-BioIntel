@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-IPCC-2022-WG2-DRYLANDS",
+  "metadata": {
+    "title": "Climate Change 2022: Impacts, Adaptation and Vulnerability. Chapter 5: Food, Fibre, and Other Ecosystem Products",
+    "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+    "year": 2022,
+    "topic": "climate",
+    "source_type": "report",
+    "source_url": "https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-5/",
+    "doi": "10.1017/9781009325844.007",
+    "geography": ["global", "drylands", "semi-arid"],
+    "variables": ["rainfall", "temperature", "soil_moisture", "species_richness"],
+    "interventions": ["polyculture", "windbreaks", "mulching", "drought_tolerant_crops"]
+  },
+  "summary": "IPCC AR6 WG2 Chapter 5 assessment on vulnerability of dryland cropping systems to rainfall deficits and heat stress.",
+  "sections": [
+    {
+      "section_title": "Drought Vulnerability in Rainfed Systems",
+      "text": "Rainfed agricultural systems in drylands face accelerating drought frequency. Polyculture rotations, hedgerow windbreaks, and mulching maintain soil humidity, lower surface evaporation by 20-30%, and stabilize yield volatility under rainfall deficits.",
+      "key_metrics": ["rainfall", "soil_moisture", "temperature"]
+    },
+    {
+      "section_title": "Ecosystem-based Adaptation",
+      "text": "Deploying drought-resilient legumes in crop rotations enhances nitrogen availability and dampens pest outbreaks, reducing overall vulnerability to prolonged dry spells.",
+      "key_metrics": ["species_richness", "soil_moisture"]
+    }
+  ]
+}

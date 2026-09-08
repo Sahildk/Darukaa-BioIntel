@@ -1,0 +1,201 @@
+{
+  "manifest_version": "1.0.0",
+  "last_updated": "2026-09-08T00:00:00Z",
+  "description": "Curated scientific corpus manifest for Darukaa BioIntel environmental intelligence system.",
+  "sources": [
+    {
+      "source_id": "SRC-FAO-2020-RECARB",
+      "title": "Recarbonizing Global Soils: A Technical Manual of Recommended Management Practices",
+      "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+      "year": 2020,
+      "topic": "soil_health",
+      "source_type": "report",
+      "source_url": "https://www.fao.org/documents/card/en/c/ca9668en",
+      "doi": "10.4060/ca9668en",
+      "geography": ["global", "semi-arid", "drylands"],
+      "variables": ["soil_organic_carbon", "soil_moisture", "microbial_diversity", "rainfall"],
+      "interventions": ["legume_cover_crops", "conservation_tillage", "agroforestry", "crop_residue_retention"],
+      "rel_path": "soil/SRC-FAO-2020-RECARB.json",
+      "summary": "Technical guidelines by FAO on restoring soil organic carbon in degraded croplands and semi-arid drylands using conservation practices and legumes.",
+      "key_findings": [
+        "In semi-arid drylands with baseline soil organic carbon below 0.5%, introducing legume-based cover crops and diversified agroforestry increases organic carbon retention and stimulates mycorrhizal activity without exacerbating water stress.",
+        "Under conservation management, soil organic carbon can increase at rates between 0.2 and 0.5 tonnes C/ha/year, with measurable gains observable over 2-3 years.",
+        "Leaving at least 30% crop residue on the surface combined with cover crops moderates soil temperature by 2-5 degrees Celsius and preserves soil moisture."
+      ]
+    },
+    {
+      "source_id": "SRC-FAO-2017-SOILCARBON",
+      "title": "Soil Organic Carbon: the hidden potential",
+      "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+      "year": 2017,
+      "topic": "soil_health",
+      "source_type": "report",
+      "source_url": "https://www.fao.org/documents/card/en/c/95ee65be-1419-45ff-8600-474070a92023/",
+      "doi": "10.4060/i6901en",
+      "geography": ["global", "arid", "semi-arid", "temperate"],
+      "variables": ["soil_organic_carbon", "soil_moisture", "microbial_biomass", "crop_yield"],
+      "interventions": ["organic_amendments", "cover_crops", "intercropping", "crop_residues"],
+      "rel_path": "soil/SRC-FAO-2017-SOILCARBON.json",
+      "summary": "FAO synthesis on the foundational role of soil organic carbon in biological diversity, soil physical stability, and hydrological resilience.",
+      "key_findings": [
+        "In low-rainfall regions, each 1% increase in SOC can enhance available soil water capacity by up to 15-20 mm per meter of soil depth.",
+        "Depletion of SOC below 1.0% triggers a severe reduction in soil biological diversity, limiting enzymatic nutrient cycling."
+      ]
+    },
+    {
+      "source_id": "SRC-LAL-2004-SCIENCE",
+      "title": "Soil Carbon Sequestration Impacts on Global Climate Change and Food Security",
+      "publisher": "Science",
+      "year": 2004,
+      "topic": "soil_health",
+      "source_type": "paper",
+      "source_url": "https://www.science.org/doi/10.1126/science.1097396",
+      "doi": "10.1126/science.1097396",
+      "geography": ["global", "drylands", "semi-arid"],
+      "variables": ["soil_organic_carbon", "rainfall", "soil_moisture", "crop_yield"],
+      "interventions": ["no_till", "mulching", "legume_rotations", "cover_crops"],
+      "rel_path": "soil/SRC-LAL-2004-SCIENCE.json",
+      "summary": "Landmark paper by Rattan Lal detailing carbon dynamics, rainfall use efficiency, and restoration of depleted dryland soils.",
+      "key_findings": [
+        "Agricultural soils in dryland and semi-arid ecosystems contain severely depleted SOC pools, often less than 0.5%.",
+        "Adoption of restorative practices enhances rainfall use efficiency, reduces erosion, and rebuilds soil biological communities.",
+        "The critical threshold of SOC in low-rainfall regions is approximately 1.1% to prevent accelerated physical crusting and runoff."
+      ]
+    },
+    {
+      "source_id": "SRC-IPCC-2019-SRCCL",
+      "title": "Climate Change and Land: Special Report on Climate Change, Desertification, Land Degradation",
+      "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+      "year": 2019,
+      "topic": "climate",
+      "source_type": "report",
+      "source_url": "https://www.ipcc.ch/srccl/",
+      "doi": "10.1017/9781009157988",
+      "geography": ["global", "semi-arid", "arid", "drylands"],
+      "variables": ["rainfall", "temperature", "soil_organic_carbon", "habitat_diversity"],
+      "interventions": ["agroforestry", "diversified_crop_rotations", "perennial_windbreaks", "sustainable_land_management"],
+      "rel_path": "climate/SRC-IPCC-2019-SRCCL.json",
+      "summary": "IPCC Special Report examining desertification, climate extremes, and sustainable land management in rainfed drylands.",
+      "key_findings": [
+        "Continuous monoculture in semi-arid and arid zones exacerbates land degradation through soil organic matter depletion and wind erosion.",
+        "Sustainable land management practices, including intercropping, shelterbelts, and agroforestry, provide climate resilience by buffering microclimatic temperatures.",
+        "Trees on field boundaries lower ground-level wind speeds by 30-50%, curtailing topsoil loss and reducing plant transpiration stress."
+      ]
+    },
+    {
+      "source_id": "SRC-IPCC-2022-WG2-DRYLANDS",
+      "title": "Climate Change 2022: Impacts, Adaptation and Vulnerability. Chapter 5: Food, Fibre, and Other Ecosystem Products",
+      "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+      "year": 2022,
+      "topic": "climate",
+      "source_type": "report",
+      "source_url": "https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-5/",
+      "doi": "10.1017/9781009325844.007",
+      "geography": ["global", "drylands", "semi-arid"],
+      "variables": ["rainfall", "temperature", "soil_moisture", "species_richness"],
+      "interventions": ["polyculture", "windbreaks", "mulching", "drought_tolerant_crops"],
+      "rel_path": "climate/SRC-IPCC-2022-WG2-DRYLANDS.json",
+      "summary": "IPCC AR6 WG2 Chapter 5 assessment on vulnerability of dryland cropping systems to rainfall deficits and heat stress.",
+      "key_findings": [
+        "Polyculture rotations, hedgerow windbreaks, and mulching maintain soil humidity, lower surface evaporation by 20-30%, and stabilize yields under rainfall deficits.",
+        "Deploying drought-resilient legumes in crop rotations enhances nitrogen availability and dampens pest outbreaks during prolonged dry spells."
+      ]
+    },
+    {
+      "source_id": "SRC-TAMBURINI-2020-SCIADV",
+      "title": "Agricultural diversification promotes multiple ecosystem services without compromising yield",
+      "publisher": "Science Advances",
+      "year": 2020,
+      "topic": "land_use",
+      "source_type": "paper",
+      "source_url": "https://www.science.org/doi/10.1126/sciadv.aba1715",
+      "doi": "10.1126/sciadv.aba1715",
+      "geography": ["global", "temperate", "semi-arid", "tropical"],
+      "variables": ["crop_diversity", "species_richness", "soil_organic_carbon", "pollinator_abundance"],
+      "interventions": ["intercropping", "crop_rotation", "cover_crops", "agroforestry"],
+      "rel_path": "land_use/SRC-TAMBURINI-2020-SCIADV.json",
+      "summary": "Global meta-analysis of 5,188 agricultural experiments showing diversification enhances biodiversity and soil organic carbon without reducing yields.",
+      "key_findings": [
+        "Synthesis of 5,188 studies demonstrates that agricultural diversification enhances biodiversity by 24% and soil organic carbon by 6-15% without reducing crop yields.",
+        "Diversification strengthens pest regulation and pollination services simultaneously.",
+        "Homogeneous monocultures systematically diminish natural pest suppression and beneficial insect diversity."
+      ]
+    },
+    {
+      "source_id": "SRC-KUYAH-2019-AGROFOR",
+      "title": "Agroforestry delivers a win-win solution for food security and ecosystem services",
+      "publisher": "Agriculture, Ecosystems & Environment",
+      "year": 2019,
+      "topic": "land_use",
+      "source_type": "paper",
+      "source_url": "https://doi.org/10.1016/j.agee.2019.04.013",
+      "doi": "10.1016/j.agee.2019.04.013",
+      "geography": ["drylands", "semi-arid", "sub-humid"],
+      "variables": ["soil_organic_carbon", "microclimate", "soil_moisture", "species_richness"],
+      "interventions": ["agroforestry", "shelterbelts", "silvopasture", "intercropping"],
+      "rel_path": "land_use/SRC-KUYAH-2019-AGROFOR.json",
+      "summary": "Meta-analysis documenting agroforestry impacts on dryland soil organic carbon, moisture retention, and biodiversity enhancement.",
+      "key_findings": [
+        "Integrating nitrogen-fixing trees into dryland cropping systems improves nitrogen availability, enhances topsoil organic matter, and provides habitat for beneficial insects and birds.",
+        "Perennial boundary windbreaks lower crop water consumption by 15-20% and generate nesting refugia for predatory arthropods and pollinators."
+      ]
+    },
+    {
+      "source_id": "SRC-GARIBALDI-2016-SCIENCE",
+      "title": "Mutually beneficial pollinator diversity and crop yield in small and large farms",
+      "publisher": "Science",
+      "year": 2016,
+      "topic": "biodiversity",
+      "source_type": "paper",
+      "source_url": "https://www.science.org/doi/10.1126/science.aac7287",
+      "doi": "10.1126/science.aac7287",
+      "geography": ["global", "agricultural_land"],
+      "variables": ["pollinator_abundance", "species_richness", "habitat_diversity", "crop_yield"],
+      "interventions": ["hedgerows", "flower_strips", "habitat_corridors", "reduced_pesticides"],
+      "rel_path": "biodiversity/SRC-GARIBALDI-2016-SCIENCE.json",
+      "summary": "Global cross-farm study in Science showing establishing native floral borders and hedgerows enhances wild pollinator diversity and stabilizes crop yields.",
+      "key_findings": [
+        "Crop yield gaps can be closed by enhancing wild pollinator density and species richness through non-crop flowering borders and hedgerows.",
+        "Continuous agricultural monocultures devoid of semi-natural vegetation suffer pollinator deficits exceeding 50%."
+      ]
+    },
+    {
+      "source_id": "SRC-ISBELL-2015-NATURE",
+      "title": "Biodiversity increases the resistance of ecosystem productivity to climate extremes",
+      "publisher": "Nature",
+      "year": 2015,
+      "topic": "biodiversity",
+      "source_type": "paper",
+      "source_url": "https://www.nature.com/articles/nature15374",
+      "doi": "10.1038/nature15374",
+      "geography": ["global", "grasslands", "croplands"],
+      "variables": ["species_richness", "drought_resistance", "ecosystem_stability", "climate_extremes"],
+      "interventions": ["polyculture", "native_species_reintroduction", "perennial_mixtures"],
+      "rel_path": "biodiversity/SRC-ISBELL-2015-NATURE.json",
+      "summary": "Nature study demonstrating that higher species richness provides critical ecosystem resistance and buffers productivity collapses during severe drought.",
+      "key_findings": [
+        "Ecosystems with higher plant species richness sustain productivity during climate extremes, including severe drought.",
+        "Low diversity plant stands show half the resistance of high diversity stands during precipitation anomalies."
+      ]
+    },
+    {
+      "source_id": "SRC-IPBES-2019-GLOBAL",
+      "title": "Global Assessment Report on Biodiversity and Ecosystem Services",
+      "publisher": "Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services (IPBES)",
+      "year": 2019,
+      "topic": "human_impact",
+      "source_type": "report",
+      "source_url": "https://www.ipbes.net/global-assessment",
+      "doi": "10.5281/zenodo.3831673",
+      "geography": ["global"],
+      "variables": ["habitat_fragmentation", "deforestation", "pollution", "species_richness"],
+      "interventions": ["ecological_corridors", "landscape_restoration", "reduced_chemical_inputs"],
+      "rel_path": "human_impact/SRC-IPBES-2019-GLOBAL.json",
+      "summary": "Global landmark assessment by IPBES analyzing drivers of biodiversity loss and recommending ecological connectivity and multi-functional landscapes.",
+      "key_findings": [
+        "Agricultural expansion and intensification without ecological corridors drive landscape fragmentation, pesticide pollution, and steep declines in terrestrial biodiversity.",
+        "Landscape-level connectivity established through native tree buffers and uncultivated boundary strips preserves ecological corridors and stabilizes ecosystem services."
+      ]
+    }
+  ]
+}

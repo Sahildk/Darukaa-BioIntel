@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-IPBES-2019-GLOBAL",
+  "metadata": {
+    "title": "Global Assessment Report on Biodiversity and Ecosystem Services",
+    "publisher": "Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services (IPBES)",
+    "year": 2019,
+    "topic": "human_impact",
+    "source_type": "report",
+    "source_url": "https://www.ipbes.net/global-assessment",
+    "doi": "10.5281/zenodo.3831673",
+    "geography": ["global"],
+    "variables": ["habitat_fragmentation", "deforestation", "pollution", "species_richness"],
+    "interventions": ["ecological_corridors", "landscape_restoration", "reduced_chemical_inputs"]
+  },
+  "summary": "Global landmark assessment by IPBES analyzing drivers of biodiversity loss and recommending ecological connectivity and multi-functional landscapes.",
+  "sections": [
+    {
+      "section_title": "Agricultural Drivers of Biodiversity Loss",
+      "text": "Agricultural expansion and intensification without ecological corridors drive landscape fragmentation, pesticide pollution, and steep declines in terrestrial invertebrate and vertebrate populations. Reconnecting habitat patches through linear perennial features and ecological restoration mitigates fragmentation impacts.",
+      "key_metrics": ["habitat_fragmentation", "species_richness"]
+    },
+    {
+      "section_title": "Landscape Connectivity",
+      "text": "Landscape-level connectivity established through native tree buffers and uncultivated boundary strips preserves ecological corridors, enabling species dispersal and stabilizing ecosystem services across intensively managed agricultural matrices.",
+      "key_metrics": ["habitat_fragmentation", "deforestation"]
+    }
+  ]
+}

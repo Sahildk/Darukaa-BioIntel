@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-FAO-2017-SOILCARBON",
+  "metadata": {
+    "title": "Soil Organic Carbon: the hidden potential",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+    "year": 2017,
+    "topic": "soil_health",
+    "source_type": "report",
+    "source_url": "https://www.fao.org/documents/card/en/c/95ee65be-1419-45ff-8600-474070a92023/",
+    "doi": "10.4060/i6901en",
+    "geography": ["global", "arid", "semi-arid", "temperate"],
+    "variables": ["soil_organic_carbon", "soil_moisture", "microbial_biomass", "crop_yield"],
+    "interventions": ["organic_amendments", "cover_crops", "intercropping", "crop_residues"]
+  },
+  "summary": "FAO synthesis on the foundational role of soil organic carbon in biological diversity, soil physical stability, and hydrological resilience.",
+  "sections": [
+    {
+      "section_title": "Hydrological Buffering",
+      "text": "Soil organic carbon (SOC) is critical for structural stability, moisture holding capacity, and microbial biodiversity. In low-rainfall regions, each 1% increase in SOC can enhance available soil water capacity by up to 15-20 mm per meter of soil depth, markedly improving crop survival during seasonal dry spells.",
+      "key_metrics": ["soil_organic_carbon", "soil_moisture"]
+    },
+    {
+      "section_title": "Microbiological Habitat",
+      "text": "Depletion of SOC below 1.0% triggers a severe reduction in soil biological diversity, limiting enzymatic nutrient cycling. Rebuilding carbon inputs fosters diverse bacterial and fungal consortia essential for root symbiosis.",
+      "key_metrics": ["microbial_biomass", "soil_organic_carbon"]
+    }
+  ]
+}

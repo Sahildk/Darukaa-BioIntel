@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-LAL-2004-SCIENCE",
+  "metadata": {
+    "title": "Soil Carbon Sequestration Impacts on Global Climate Change and Food Security",
+    "publisher": "Science",
+    "year": 2004,
+    "topic": "soil_health",
+    "source_type": "paper",
+    "source_url": "https://www.science.org/doi/10.1126/science.1097396",
+    "doi": "10.1126/science.1097396",
+    "geography": ["global", "drylands", "semi-arid"],
+    "variables": ["soil_organic_carbon", "rainfall", "soil_moisture", "crop_yield"],
+    "interventions": ["no_till", "mulching", "legume_rotations", "cover_crops"]
+  },
+  "summary": "Landmark paper by Rattan Lal detailing carbon dynamics, rainfall use efficiency, and restoration of depleted dryland soils.",
+  "sections": [
+    {
+      "section_title": "Dryland Soil Carbon Depletion",
+      "text": "Agricultural soils in dryland and semi-arid ecosystems contain severely depleted SOC pools, often less than 0.5%. Adoption of restorative practices such as conservation tillage, mulching, and legume cover cropping enhances rainfall use efficiency, reduces erosion, and rebuilds the soil biological community.",
+      "key_metrics": ["soil_organic_carbon", "rainfall"]
+    },
+    {
+      "section_title": "Soil Moisture Coupling",
+      "text": "The critical limit of SOC in low-rainfall tropical and subtropical regions is approximately 1.1%. Below this threshold, soil structural decline accelerates, leading to surface crusting and elevated runoff losses during sudden rainfall events.",
+      "key_metrics": ["soil_organic_carbon", "soil_moisture"]
+    }
+  ]
+}

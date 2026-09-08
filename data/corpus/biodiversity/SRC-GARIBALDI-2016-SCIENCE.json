@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-GARIBALDI-2016-SCIENCE",
+  "metadata": {
+    "title": "Mutually beneficial pollinator diversity and crop yield in small and large farms",
+    "publisher": "Science",
+    "year": 2016,
+    "topic": "biodiversity",
+    "source_type": "paper",
+    "source_url": "https://www.science.org/doi/10.1126/science.aac7287",
+    "doi": "10.1126/science.aac7287",
+    "geography": ["global", "agricultural_land"],
+    "variables": ["pollinator_abundance", "species_richness", "habitat_diversity", "crop_yield"],
+    "interventions": ["hedgerows", "flower_strips", "habitat_corridors", "reduced_pesticides"]
+  },
+  "summary": "Global cross-farm study in Science showing establishing native floral borders and hedgerows enhances wild pollinator diversity and stabilizes crop yields.",
+  "sections": [
+    {
+      "section_title": "Pollinator Diversity and Yield Gains",
+      "text": "Crop yield gaps can be closed by enhancing wild pollinator density and species richness. Establishing non-crop flowering borders, hedgerows, and reducing pesticide applications enhances both floral resources and nesting habitat, generating positive yield and biodiversity feedback.",
+      "key_metrics": ["pollinator_abundance", "species_richness", "crop_yield"]
+    },
+    {
+      "section_title": "Habitat Corridors in Croplands",
+      "text": "Continuous agricultural monocultures devoid of semi-natural vegetation suffer pollinator deficits exceeding 50%. Connecting fields via floral buffer strips restores wild bee foraging and stabilizes visitation rates across seasonal variations.",
+      "key_metrics": ["habitat_diversity", "pollinator_abundance"]
+    }
+  ]
+}

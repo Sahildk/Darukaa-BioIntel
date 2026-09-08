@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-ISBELL-2015-NATURE",
+  "metadata": {
+    "title": "Biodiversity increases the resistance of ecosystem productivity to climate extremes",
+    "publisher": "Nature",
+    "year": 2015,
+    "topic": "biodiversity",
+    "source_type": "paper",
+    "source_url": "https://www.nature.com/articles/nature15374",
+    "doi": "10.1038/nature15374",
+    "geography": ["global", "grasslands", "croplands"],
+    "variables": ["species_richness", "drought_resistance", "ecosystem_stability", "climate_extremes"],
+    "interventions": ["polyculture", "native_species_reintroduction", "perennial_mixtures"]
+  },
+  "summary": "Nature study demonstrating that higher species richness provides critical ecosystem resistance and buffers productivity collapses during severe drought.",
+  "sections": [
+    {
+      "section_title": "Drought Resistance through Diversity",
+      "text": "Ecosystems with higher plant species richness sustain productivity during climate extremes, including severe drought. Monocultures consistently experience severe biomass loss during water stress, whereas diverse plant communities maintain below-ground microbial associations and root niche differentiation.",
+      "key_metrics": ["species_richness", "drought_resistance"]
+    },
+    {
+      "section_title": "Ecosystem Stability Thresholds",
+      "text": "Low diversity plant stands show half the resistance of high diversity stands during precipitation anomalies, demonstrating that biodiversity is a functional prerequisite for climate resilience in rainfed landscapes.",
+      "key_metrics": ["ecosystem_stability", "species_richness"]
+    }
+  ]
+}

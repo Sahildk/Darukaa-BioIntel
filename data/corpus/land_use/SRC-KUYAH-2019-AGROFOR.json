@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-KUYAH-2019-AGROFOR",
+  "metadata": {
+    "title": "Agroforestry delivers a win-win solution for food security and ecosystem services",
+    "publisher": "Agriculture, Ecosystems & Environment",
+    "year": 2019,
+    "topic": "land_use",
+    "source_type": "paper",
+    "source_url": "https://doi.org/10.1016/j.agee.2019.04.013",
+    "doi": "10.1016/j.agee.2019.04.013",
+    "geography": ["drylands", "semi-arid", "sub-humid"],
+    "variables": ["soil_organic_carbon", "microclimate", "soil_moisture", "species_richness"],
+    "interventions": ["agroforestry", "shelterbelts", "silvopasture", "intercropping"]
+  },
+  "summary": "Meta-analysis documenting agroforestry impacts on dryland soil organic carbon, moisture retention, and biodiversity enhancement.",
+  "sections": [
+    {
+      "section_title": "Agroforestry in Dryland Systems",
+      "text": "Integrating nitrogen-fixing trees into dryland cropping systems improves nitrogen availability, enhances topsoil organic matter, and provides habitat structure for wild beneficial insects, spiders, and birds, curtailing pest pressures in adjacent crop rows.",
+      "key_metrics": ["soil_organic_carbon", "species_richness"]
+    },
+    {
+      "section_title": "Boundary Windbreaks and Microclimate",
+      "text": "Perennial boundary windbreaks reduce boundary layer turbulence, lowering crop water consumption by 15-20% and generating nesting refugia for predatory arthropods and avian pollinators.",
+      "key_metrics": ["soil_moisture", "microclimate"]
+    }
+  ]
+}

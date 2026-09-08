@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-FAO-2020-RECARB",
+  "metadata": {
+    "title": "Recarbonizing Global Soils: A Technical Manual of Recommended Management Practices",
+    "publisher": "Food and Agriculture Organization of the United Nations (FAO)",
+    "year": 2020,
+    "topic": "soil_health",
+    "source_type": "report",
+    "source_url": "https://www.fao.org/documents/card/en/c/ca9668en",
+    "doi": "10.4060/ca9668en",
+    "geography": ["global", "semi-arid", "drylands"],
+    "variables": ["soil_organic_carbon", "soil_moisture", "microbial_diversity", "rainfall"],
+    "interventions": ["legume_cover_crops", "conservation_tillage", "agroforestry", "crop_residue_retention"]
+  },
+  "summary": "Technical guidelines by FAO on restoring soil organic carbon in degraded croplands and semi-arid drylands using conservation practices and legumes.",
+  "sections": [
+    {
+      "section_title": "Dryland Soil Carbon Dynamics",
+      "text": "In semi-arid drylands with baseline soil organic carbon below 0.5%, introducing legume-based cover crops and diversified agroforestry increases organic carbon retention and stimulates mycorrhizal activity without exacerbating water stress. Under conservation management, soil organic carbon can increase at rates between 0.2 and 0.5 tonnes C/ha/year, with measurable gains observable over 2-3 years.",
+      "key_metrics": ["soil_organic_carbon", "microbial_diversity"]
+    },
+    {
+      "section_title": "Crop Rotation and Residue Management",
+      "text": "Leaving at least 30% crop residue on the soil surface combined with nitrogen-fixing cover crops moderates soil surface temperature by 2-5 degrees Celsius and preserves capillary soil moisture during high-evaporation dry seasons.",
+      "key_metrics": ["soil_moisture", "temperature"]
+    }
+  ]
+}

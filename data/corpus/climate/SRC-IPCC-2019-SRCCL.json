@@ -1,0 +1,28 @@
+{
+  "source_id": "SRC-IPCC-2019-SRCCL",
+  "metadata": {
+    "title": "Climate Change and Land: Special Report on Climate Change, Desertification, Land Degradation",
+    "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
+    "year": 2019,
+    "topic": "climate",
+    "source_type": "report",
+    "source_url": "https://www.ipcc.ch/srccl/",
+    "doi": "10.1017/9781009157988",
+    "geography": ["global", "semi-arid", "arid", "drylands"],
+    "variables": ["rainfall", "temperature", "soil_organic_carbon", "habitat_diversity"],
+    "interventions": ["agroforestry", "diversified_crop_rotations", "perennial_windbreaks", "sustainable_land_management"]
+  },
+  "summary": "IPCC Special Report examining desertification, climate extremes, and sustainable land management in rainfed drylands.",
+  "sections": [
+    {
+      "section_title": "Desertification and Monocultures",
+      "text": "Continuous monoculture in semi-arid and arid zones exacerbates land degradation through soil organic matter depletion and wind erosion. Sustainable land management practices, including intercropping, shelterbelts, and agroforestry, provide climate resilience by buffering microclimatic temperatures and preserving groundwater resources.",
+      "key_metrics": ["soil_organic_carbon", "rainfall", "habitat_diversity"]
+    },
+    {
+      "section_title": "Agroforestry Microclimate Regulation",
+      "text": "Trees integrated on agricultural boundaries lower ground-level wind speeds by 30-50%, curtailing topsoil loss and reducing plant transpiration stress under high temperatures and erratic precipitation.",
+      "key_metrics": ["temperature", "rainfall"]
+    }
+  ]
+}
